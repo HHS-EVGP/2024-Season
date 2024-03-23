@@ -9,3 +9,4 @@ Things that need to be installed:
 - pip3 install adafruit_rfm9x
 - pip3 install adafruit-circuitpython-rfm9x
 - pip3 install adafruit-circuitpython-lsm6ds
+- pip3 install pyserial
