@@ -15,9 +15,9 @@ rfm9x = adafruit_rfm9x.RFM9x(busio.SPI(board.SCK, MOSI=board.MOSI, MISO=board.MI
 rfm9x.tx_power = 23
 #Setup i2C & Devices
 i2c = busio.I2C(board.SCL, board.SDA)
-analogA = ADS.ADS1115(i2c, address = 72)
-analogB = ADS.ADS1115(i2c, address = 72)
-imu = LSM6DSOX(i2c, address = 72)
+analogA = ADS.ADS1115(i2c, address = 0x4A)
+analogB = ADS.ADS1115(i2c, address = 0x4B)
+imu = LSM6DSOX(i2c, address = 0x6A)
 #Setup Analog In Ports
 A0 = AnalogIn(analogA, ADS.P0) # motorTemp
 A1 = AnalogIn(analogA, ADS.P1) # throttle
