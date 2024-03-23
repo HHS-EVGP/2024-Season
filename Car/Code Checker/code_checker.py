@@ -23,4 +23,3 @@ while(1):
         time.sleep(0.35)
         GPIO.output(code_error_led, 1)
         time.sleep(0.35)
-    

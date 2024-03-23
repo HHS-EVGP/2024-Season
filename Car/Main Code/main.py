@@ -6,10 +6,18 @@ import os
 import time
 import serial
 import logging
+import RPi.GPIO as GPIO 
 from adafruit_ads1x15.analog_in import AnalogIn
 from digitalio import DigitalInOut, Direction, Pull
 from adafruit_lsm6ds.lsm6dsox import LSM6DSOX
 
+print("I guess all of the packages loaded! (:")
+
+#Setup Send LED
+sendLED = None # SET THIS
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(sendLED, GPIO.OUT)
+GPIO.output(sendLED, 0)
 #Setup & Configure RFM9x LoRa Radio
 rfm9x = adafruit_rfm9x.RFM9x(busio.SPI(board.SCK, MOSI=board.MOSI, MISO=board.MISO), DigitalInOut(board.CE1), DigitalInOut(board.D25), 433.0, high_power = True)
 rfm9x.tx_power = 23
@@ -71,11 +79,9 @@ def analogPull():
     return data
 
 def sendRF(data):
-
+    GPIO.output(sendLED, 1)
     print(data)
-
     rfm9x.send(bytearray(data,'utf-8'))
-
     logging.warning(data)
 
 while running:
@@ -86,9 +92,5 @@ while running:
     data_2_send += UART()
     
     sendRF(data_2_send)
+    GPIO.output(sendLED, 0)
     time.sleep(0.25)
-
-
-    
-    
-    
