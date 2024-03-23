@@ -27,7 +27,7 @@ def shutdown():
     restart_now()
     
 gpio.add_event_detect(button1_gpio_pin, gpio.RISING, callback=start_code, bouncetime=300)
-gpio.add_event_detect(button1_gpio_pin, gpio.RISING, callback=shutdown, bouncetime=300)
+gpio.add_event_detect(button2_gpio_pin, gpio.RISING, callback=shutdown, bouncetime=300)
 
 while 1:
     time.sleep(360)
