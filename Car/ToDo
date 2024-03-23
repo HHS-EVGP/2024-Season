@@ -1,3 +1,4 @@
 chmod +x /path/to/monitor_wifi.sh
 sudo systemctl enable wifi_monitor.service
 sudo systemctl start wifi_monitor.service
+test
