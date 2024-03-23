@@ -6,7 +6,8 @@ Commands to run:
 Things that need to be installed:
 - pip3 install adafruit-circuitpython-ads1x15
 - pip3 install Adafruit-ADS1x15
-- pip3 install adafruit_rfm9x
 - pip3 install adafruit-circuitpython-rfm9x
 - pip3 install adafruit-circuitpython-lsm6ds
 - pip3 install pyserial
+Or just do this:
+- sudo pip3 install adafruit-circuitpython-ads1x15 Adafruit-ADS1x15 adafruit-circuitpython-rfm9x adafruit-circuitpython-lsm6ds pyserial
