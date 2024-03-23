@@ -5,7 +5,7 @@ Description=Check If the Main Code is running
 Restart=always
 RestartSec=3
 User=root
-ExecStart=python3 /path/to/file/code_checker.py
+ExecStart=python3 "/path/to/file/code_checker.py"
 
 [Install]
 WantedBy=multi-user.target

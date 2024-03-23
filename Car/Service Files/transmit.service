@@ -5,7 +5,7 @@ Description=Main Code to transmint the Data
 Restart=always
 RestartSec=3
 User=root
-ExecStart=python3 /path/to/file/main.py
+ExecStart=python3 "/path/to/file/main.py"
 
 [Install]
 WantedBy=multi-user.target

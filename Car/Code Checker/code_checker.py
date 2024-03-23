@@ -6,7 +6,9 @@ code_status_led = None # SET THESE
 code_error_led = None # SET THESE
 
 GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
 GPIO.setup(code_status_led, GPIO.OUT)
+GPIO.setup(code_error_led, GPIO.OUT)
 
 while(1):
     status = os.system('systemctl is-active --quiet transmit.service')
