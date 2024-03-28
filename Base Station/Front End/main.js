@@ -12,5 +12,21 @@ function updateContent() {
 } 
 updateContent();
 
+var realWindowsWidth, realWindowsHeight
 
+function setup() {
+    realWindowsWidth = windowWidth - 184
+    realWindowsHeight = windowHeight - 104
+    var canvas = createCanvas(windowWidth-184, windowHeight-104);
+    canvas.parent('p5Canvas'); // Make sure this ID matches the one in your div
+}
+function windowResized() {
+    realWindowsWidth = windowWidth - 184
+    realWindowsHeight = windowHeight - 104
+    resizeCanvas(windowWidth-184, windowHeight-104);
+  }
+  
+function draw() {
+    background(220);
+}
 

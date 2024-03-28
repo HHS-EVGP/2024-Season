@@ -14,13 +14,17 @@
     grid:
       "header header" 76px
       "sideBar body" auto
-      / 12% auto;
+      / 155px auto;
     gap: 8px;
   }
   
 .header { grid-area: header; }
 .sideBar { grid-area: sideBar; }
-.body { grid-area: body; }
+.body { 
+    grid-area: body; 
+    gap: 0px;
+    margin: 0px;
+}
 
 .fill {
     min-width: 300px;
