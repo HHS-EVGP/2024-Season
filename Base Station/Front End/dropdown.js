@@ -52,4 +52,5 @@ function getSelectedCheckboxes() {
     const checkedBoxes = document.querySelectorAll('input[type="checkbox"]:checked');
     const selectedIds = Array.from(checkedBoxes).map(box => box.id);
     items = selectedIds;
+    updateContent();
 }
