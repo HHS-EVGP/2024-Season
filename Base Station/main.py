@@ -29,35 +29,39 @@ rfm9x.tx_power = 23
 
 index = 1
 conter = 0
-while os.path.exists(f"/home/pit/2024/{index}.data.csv"):
+while os.path.exists(f"/home/pit/{index}.data.csv"):
     index += 1
-new_file_name = f"/home/pit/2024/{index}.data.csv"
+new_file_name = f"/home/pit/{index}.data.csv"
 
 fieldnames = [
     'time','counter',
+    'motor_temp','throttle',
+    'Brake_Pedal','Battery_1','Battery_2',
     'IMU_Accel_x', 'IMU_Accel_y', 'IMU_Accel_z',
     'IMU_Gyro_x', 'IMU_Gyro_y', 'IMU_Gyro_z',
-    'Battery_1','Battery_2','Brake_Pedal',
-    'ca_AmpHrs','ca_Voltage','ca_Current','ca_Speed','ca_Miles',
-    'motor_temp','throttle'
+    'ca_AmpHrs','ca_Voltage','ca_Current','ca_Speed','ca_Miles'
     ]
 
-ax = None
-ay = None
-az = None
-gx = None
-gy = None
-gz = None
-batt1 = None
-batt2 = None
-bp = None
-AH = None
-V = None
-C = None
-S = None
-M = None
-MT = None
+accelerometer_x = None
+accelerometer_y = None
+accelerometer_z = None
+gyroscope_x = None
+gyroscope_y = None
+gyroscope_z = None
+
 th = None
+
+motor_temp = None
+Battery_temp_1 = None
+Battery_temp_2 = None
+
+brake_pedal = None
+
+amp_hours = None
+voltage = None
+current = None
+speed = None
+miles = None
 
 def printError(erorr):
     print("_"*20)
@@ -97,53 +101,58 @@ while True:
                     print(conter)
                     CA, BP, temps, motor, throttle, IMU = map(str, all_data)
                     
+                    # TODO FIX NO-VALUE
                     if IMU.startswith("imu,"):
                         values = IMU.split(',')
-                        ax, ay, az, gx, gy, gz = map(float, values[1:])
-                        if ay == "None":
-                            ax = ""
-                            ay = ""
-                            az = ""
-                            gx = ""
-                            gy = ""
-                            gz = ""
+                        accelerometer_x, accelerometer_y, accelerometer_z, gyroscope_x, gyroscope_y, gyroscope_z = map(float, values[1:])
+                        if accelerometer_y == "None":
+                            accelerometer_x = ""
+                            accelerometer_y = ""
+                            accelerometer_z = ""
+                            gyroscope_x = ""
+                            gyroscope_y = ""
+                            gyroscope_z = ""
 
                     if temps.startswith("temps,"):
                         values = temps.split(',')
-                        batt1, batt2 = map(float, values[1:])
-                        if batt1 == "None":
-                            batt1 = ""
-                        if batt2 == "None":
-                            batt2 = ""
+                        Battery_temp_1, Battery_temp_2 = map(float, values[1:])
 
+                        # TODO FIX NO-VALUE
+                        if Battery_temp_1 == "None":
+                            Battery_temp_1 = ""
+                        if Battery_temp_2 == "None":
+                            Battery_temp_2 = ""
+
+                    # TODO FIX NO-VALUE
                     if BP.startswith("BP,"):
                         values = BP.split(',')
-                        bp = values[1:][0]
-                        if bp == "None":
-                            bp = ""
+                        brake_pedal = values[1:][0]
+                        if brake_pedal == "None":
+                            brake_pedal = ""
 
+                    # TODO FIX NO-VALUE
                     if CA.startswith("CA,"):
                         values = CA.split(',')
                         try:
-                            AH, V, C, S, M, Other, Other = values[1:]
-                            if AH == "None":
-                                AH = ""
-                            if V == "None":
-                                V = ""
-                            if C == "None":
-                                C = ""
-                            if S == "None":
-                                S = ""
-                            if M == "None":
-                                M = ""
+                            amp_hours, voltage, current, speed, miles, Other, Other = values[1:]
+                            if amp_hours == "None":
+                                amp_hours = ""
+                            if voltage == "None":
+                                voltage = ""
+                            if current == "None":
+                                current = ""
+                            if speed == "None":
+                                speed = ""
+                            if miles == "None":
+                                miles = ""
                         except:
                             pass
 
                     if motor.startswith("motor,"):
                         values = motor.split(',')
-                        MT = values[1:][0]
-                        if MT == "None":
-                            MT = ""
+                        motor_temp = values[1:][0]
+                        if motor_temp == "None":
+                            motor_temp = ""
 
                     if throttle.startswith("throttle,"):
                         values = throttle.split(',')
@@ -157,11 +166,11 @@ while True:
                 try:
                     writer.writerow({
                         'time':datetime.now(),'counter':conter,
-                        'IMU_Accel_x':ax, 'IMU_Accel_y':ay, 'IMU_Accel_z':az,
-                        'IMU_Gyro_x':gx, 'IMU_Gyro_y':gy, 'IMU_Gyro_z':gz,
-                        'Battery_1':batt1,'Battery_2':batt2,'Brake_Pedal':bp,
-                        'ca_AmpHrs':AH,'ca_Voltage':V,'ca_Current':C,'ca_Speed':S,'ca_Miles':M,
-                        'motor_temp':MT,'throttle':th
+                        'IMU_Accel_x':accelerometer_x, 'IMU_Accel_y':accelerometer_y, 'IMU_Accel_z':accelerometer_z,
+                        'IMU_Gyro_x':gyroscope_x, 'IMU_Gyro_y':gyroscope_y, 'IMU_Gyro_z':gyroscope_z,
+                        'Battery_1':Battery_temp_1,'Battery_2':Battery_temp_2,'Brake_Pedal':brake_pedal,
+                        'ca_AmpHrs':amp_hours,'ca_Voltage':voltage,'ca_Current':current,'ca_Speed':speed,'ca_Miles':miles,
+                        'motor_temp':motor_temp,'throttle':th
                         })
                 except Exception as err:
                     printError(err)
