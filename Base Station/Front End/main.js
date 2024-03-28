@@ -100,6 +100,7 @@ function windowResized() {
 
 
 function draw() {
-    speed_gauge.draw(50);
+
+    speed_gauge.draw(0);
 }
 
