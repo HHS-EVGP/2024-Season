@@ -16,9 +16,9 @@ var realWindowsWidth, realWindowsHeight
 
 class odometer {
     constructor(x,y,size,title) {
-        this.x = size;
-        this.y = size;
-        this.size = size;
+        this.x = x;
+        this.y = y;
+        this.size = size*175;
         this.title = title;
     }
     draw(value) {
@@ -80,7 +80,7 @@ class odometer {
     }
 }
 
-let speed_gauge = new odometer(500,500,200,'Speed');
+let speed_gauge = new odometer(200,200,1,'Speed');
 
 function setup() {
     realWindowsWidth = windowWidth - 184
