@@ -13,6 +13,10 @@ from adafruit_lsm6ds.lsm6dsox import LSM6DSOX
 
 print("I guess all of the packages loaded! (:")
 
+# Make sure to replace with your schools ID (Whatever you want, just not the same as someone else)
+# Known id's: "hhs", "rhs"
+school_id = "hhs"
+
 #Setup Send LED
 sendLED = None # SET THIS
 GPIO.setmode(GPIO.BCM)
@@ -86,7 +90,7 @@ def sendRF(data):
 
 while running:
 
-    data_2_send = "HHS|"
+    data_2_send = f"{school_id}|" 
     data_2_send += analogPull()
     data_2_send += imuPull()
     data_2_send += UART()
