@@ -1,5 +1,3 @@
-
-
 window.onload = function() {
     document.getElementById('itemSelection').addEventListener('change', function() {
         // Hide all selection areas first
