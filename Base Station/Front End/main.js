@@ -109,6 +109,7 @@ class odometer {
 }
 
 let speed_gauge = new odometer(200,200,1,0,50,3,'Speed');
+let speed_gauge2 = new odometer(200,400,1,50,300,4,'Speed');
 
 function setup() {
     realWindowsWidth = windowWidth - 184
@@ -129,6 +130,7 @@ function windowResized() {
 
 function draw() {
 
-    speed_gauge.draw(0);
+    speed_gauge.draw(20);
+    speed_gauge2.draw(200);
 }
 
