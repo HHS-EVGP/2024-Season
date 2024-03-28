@@ -15,11 +15,14 @@ updateContent();
 var realWindowsWidth, realWindowsHeight
 
 class odometer {
-    constructor(x,y,size,title) {
-        this.x = x;
-        this.y = y;
-        this.size = size*175;
-        this.title = title;
+    constructor(x,y,size,min,max,red,title) {
+        this.x = x;            // X Location
+        this.y = y;            // Y Location
+        this.min = min;        // Minimum Value
+        this.max = max;        // Maximum Value
+        this.red = red;        // Number of Red Numbers (From Right)
+        this.size = size*175;  // Size of Odometer
+        this.title = title;    // Name of Odometer
     }
     draw(value) {
         strokeWeight(0);
@@ -48,20 +51,45 @@ class odometer {
         text( this.title, this.x, this.y+this.size*0.05);
 
         textSize(this.size*0.075);
+        
+
+        let x_table = [
+            -0.265165042945,
+            -0.356646193611,
+            -0.370383127723,
+            -0.303381372891,
+            -0.170246437402,
+            0.0,
+            0.170246437402,
+            0.303381372891,
+            0.370383127723,
+            0.356646193611,
+            0.265165042945
+        ]
+
+        let y_table = [
+            0.265165042945,
+            0.115881372891,
+            -0.0586629243901,
+            -0.22041946961,
+            -0.334127446571,
+            -0.375,
+            -0.334127446571,
+            -0.22041946961,
+            -0.0586629243901,
+            0.115881372891,
+            0.265165042945
+        ]
+
         fill('white');
-        text("0", this.x+this.size*(-0.265165042945),  this.y+this.size*(0.265165042945), );
-        text("5", this.x+this.size*(-0.356646193611),  this.y+this.size*(0.115881372891), );
-        text("10", this.x+this.size*(-0.370383127723), this.y+this.size*(-0.0586629243901), );
-        text("15", this.x+this.size*(-0.303381372891), this.y+this.size*(-0.22041946961), );
-        text("20", this.x+this.size*(-0.170246437402), this.y+this.size*(-0.334127446571), );
-        text("25", this.x+this.size*(0.0),             this.y+this.size*(-0.375), );
-        text("30", this.x+this.size*(0.170246437402),  this.y+this.size*(-0.334127446571), );
-        text("35", this.x+this.size*(0.303381372891),  this.y+this.size*(-0.22041946961), );
+        for (let i = 0; i < 11-this.red; i++) {
+            text(round(i*(this.max-this.min)/10), this.x+this.size*(x_table[i]), this.y+this.size*(y_table[i]));
+        }
 
         fill('red');
-        text("40", this.x+this.size*(0.370383127723),  this.y+this.size*(-0.0586629243901));
-        text("45", this.x+this.size*(0.356646193611),  this.y+this.size*(0.115881372891));
-        text("50", this.x+this.size*(0.265165042945),  this.y+this.size*(0.265165042945));
+        for (let i = 11-this.red; i < 11; i++) {
+            text(round(i*(this.max-this.min)/10), this.x+this.size*(x_table[i]), this.y+this.size*(y_table[i]));
+        }
 
         fill('#C0392B');
 
@@ -80,7 +108,7 @@ class odometer {
     }
 }
 
-let speed_gauge = new odometer(200,200,1,'Speed');
+let speed_gauge = new odometer(200,200,1,0,50,3,'Speed');
 
 function setup() {
     realWindowsWidth = windowWidth - 184
