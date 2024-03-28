@@ -47,9 +47,9 @@ dataR = None
 conter = 0
 #Setup Logging
 index = 1
-while os.path.exists(f"/home/car/2024{index}.data.log"):
+while os.path.exists(f"/home/car/{index}.data.log"):
     index = index + 1
-new_file_name = f"/home/car/2024/{index}.data.log"
+new_file_name = f"/home/car/{index}.data.log"
 logging.basicConfig(filename=new_file_name, filemode='w', format='%(message)s')
 
 def imuPull():

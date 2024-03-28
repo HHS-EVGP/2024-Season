@@ -1,0 +1,3 @@
+User:     "pit"
+Password: "evgp"
+hostname: "base.local"
