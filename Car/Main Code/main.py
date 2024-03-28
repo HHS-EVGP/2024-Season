@@ -76,7 +76,7 @@ def UART():
     data = cycleAnalyst.read(10)
     print(bytes)
     print(data)
-    return f"CA,Unknown,Unknown,Unknown,Unknown,Unknown|"
+    return f"CA,None,None,None,None,None|"
 
 def analogPull():
     data = ""
