@@ -53,33 +53,64 @@ new_file_name = f"/home/car/{index}.data.log"
 logging.basicConfig(filename=new_file_name, filemode='w', format='%(message)s')
 
 def imuPull():
-    data = (
-            str(round(imu.acceleration[0],2))
-            +","+
-            str(round(imu.acceleration[1],2))
-            +","+
-            str(round(imu.acceleration[2],2))
-            +","+
-            str(round(imu.gyro[0],2))
-            +","+
-            str(round(imu.gyro[1],2))
-            +","+
-            str(round(imu.gyro[2],2))
-            )
-
-    return f"imu,{data}|"
+    try:
+        data = (
+                str(round(imu.acceleration[0],2))
+                +","+
+                str(round(imu.acceleration[1],2))
+                +","+
+                str(round(imu.acceleration[2],2))
+                +","+
+                str(round(imu.gyro[0],2))
+                +","+
+                str(round(imu.gyro[1],2))
+                +","+
+                str(round(imu.gyro[2],2))
+                )
+        return f"imu,{data}|"
+    except:
+        return f"imu,None,None,None,None,None,None|"
 
 def UART():
+    # Send output as: "CA,amp_hours,voltage,current,speed,miles|"
     data = cycleAnalyst.read(10)
     print(bytes)
     print(data)
     return f"CA,Unknown,Unknown,Unknown,Unknown,Unknown|"
 
 def analogPull():
-    data  = f"motorTemp,{A0.value}|"
-    data += f"throttle,{A1.value}|"
-    data += f"brake,{A2.value}|"
-    data += f"battTemp1,{A3.value}|"
+    data = ""
+    temp_data = ""
+    try:
+        data += f"throttle,{A1.value}|"
+    except:
+        data += f"throttle,None|"
+
+    try:
+        data += f"brake,{A2.value}|"
+    except:
+        data += f"brake,None|"
+
+    # Motor Temperature
+    try:
+        temp_data += f"{A0.value},"
+    except:
+        temp_data += "None,"
+
+    # Battery 1 Temperature
+    try:
+        temp_data += f"{A3.value},"
+    except:
+        temp_data += "None,"
+
+    # Battery 2 Temperature
+    try:
+        temp_data += f"{B0.value}"
+    except:
+        temp_data += "None"
+
+    data += f"tempatureData,{temp_data}|"
+
     return data
 
 def sendRF(data):
