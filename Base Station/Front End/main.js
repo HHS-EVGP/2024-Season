@@ -15,9 +15,11 @@ updateContent();
 var realWindowsWidth, realWindowsHeight
 
 class odometer {
-    constructor(x,y,size,min,max,red,title) {
+    // constructor(x,y,size,min,max,red,title) {
+    constructor(x,y,title,rate,max=100,min=0,size=1,red=3,) {
         this.x = x;            // X Location
         this.y = y;            // Y Location
+        this.rate = rate;      // Rate (Relates to the value)
         this.min = min;        // Minimum Value
         this.max = max;        // Maximum Value
         this.red = red;        // Number of Red Numbers (From Right)
@@ -37,7 +39,8 @@ class odometer {
         arc(this.x, this.y, this.size, this.size, PI - QUARTER_PI , QUARTER_PI);
 
         fill('#17202A');         //  TODO THIS PART::  -QUARTER_PI - (HALF_PI - HALF_PI * this.value/100)
-        arc(this.x, this.y, this.size, this.size, PI - QUARTER_PI, PI - QUARTER_PI + ((5.4*this.value)*PI/180));
+        arc(this.x, this.y, this.size, this.size, PI-QUARTER_PI, PI-QUARTER_PI + (((270/(this.max-this.min))*(this.value-this.min))*PI/180));
+        console.log(((270/(this.max-this.min))*(this.value-this.min)))
         
         textAlign(CENTER);
         
@@ -46,7 +49,7 @@ class odometer {
 
         textSize(this.size*0.075);
         fill('#17202A'); 
-        text( this.value + 'mph', this.x, this.y - this.size*0.1);
+        text( this.value + this.rate, this.x, this.y - this.size*0.1);
         textSize(this.size*0.125);
         text( this.title, this.x, this.y+this.size*0.05);
 
@@ -83,17 +86,17 @@ class odometer {
 
         fill('white');
         for (let i = 0; i < 11-this.red; i++) {
-            text(round(i*(this.max-this.min)/10), this.x+this.size*(x_table[i]), this.y+this.size*(y_table[i]));
+            text(round((i*(this.max-this.min)/10)+this.min), this.x+this.size*(x_table[i]), this.y+this.size*(y_table[i]));
         }
 
         fill('red');
         for (let i = 11-this.red; i < 11; i++) {
-            text(round(i*(this.max-this.min)/10), this.x+this.size*(x_table[i]), this.y+this.size*(y_table[i]));
+            text(round((i*(this.max-this.min)/10)+this.min), this.x+this.size*(x_table[i]), this.y+this.size*(y_table[i]));
         }
 
         fill('#C0392B');
 
-        let angle = (-135 + 5.4*this.value)*PI/180
+        let angle = (((270/(this.max-this.min))*(this.value-this.min))-135)*PI/180
 
         let x = this.x + this.size*0.45 * sin(angle);
         let y = this.y - this.size*0.45 * cos(angle);
@@ -108,8 +111,13 @@ class odometer {
     }
 }
 
-let speed_gauge = new odometer(200,200,1,0,50,3,'Speed');
-let speed_gauge2 = new odometer(200,400,1,50,300,4,'Speed');
+let speed = new odometer(75,75,'Speed','mph',50,0,0.75);
+let voltage = new odometer(75*3,75,'Voltage','V',53,43,0.75,0);
+let current = new odometer(75*5,75,'Current','amps',150,0,0.75,6);
+
+let Motor_Temp = new odometer(75,75*3,'Motor Temp',"°F",150,32,0.75,4);
+let Battery_Temp_1 = new odometer(75*3,75*3,'Temp 1',"°F",120,32,0.75,4);
+let Battery_Temp_2 = new odometer(75*5,75*3,'Temp 2',"°F",120,32,0.75,4);
 
 function setup() {
     realWindowsWidth = windowWidth - 184
@@ -120,7 +128,6 @@ function setup() {
 
     frameRate(20);
 }
-
 function windowResized() {
     realWindowsWidth = windowWidth - 184
     realWindowsHeight = windowHeight - 104
@@ -129,8 +136,12 @@ function windowResized() {
 
 
 function draw() {
+    speed.draw(30);
+    voltage.draw(48);
+    current.draw(48);
 
-    speed_gauge.draw(20);
-    speed_gauge2.draw(200);
+    Motor_Temp.draw(63);
+    Battery_Temp_1.draw(45);
+    Battery_Temp_2.draw(44);
 }
 
