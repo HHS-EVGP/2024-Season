@@ -7,16 +7,15 @@ function updateContent() {
     if(document.getElementById("itemSelection").value == "All"){
         items = Allitems;
     }
-    console.log('Selected school:', school);
-    console.log('Selected things:', items);
+    // console.log('Selected school:', school);
+    // console.log('Selected things:', items);
 } 
 updateContent();
 
 var realWindowsWidth, realWindowsHeight
 
 class odometer {
-    // constructor(x,y,size,min,max,red,title) {
-    constructor(x,y,title,rate,max=100,min=0,size=1,red=3,) {
+    constructor(x,y,title,rate,max=100,min=0,size=1,red=3) {
         this.x = x;            // X Location
         this.y = y;            // Y Location
         this.rate = rate;      // Rate (Relates to the value)
@@ -40,7 +39,6 @@ class odometer {
 
         fill('#17202A');         //  TODO THIS PART::  -QUARTER_PI - (HALF_PI - HALF_PI * this.value/100)
         arc(this.x, this.y, this.size, this.size, PI-QUARTER_PI, PI-QUARTER_PI + (((270/(this.max-this.min))*(this.value-this.min))*PI/180));
-        console.log(((270/(this.max-this.min))*(this.value-this.min)))
         
         textAlign(CENTER);
         
@@ -111,9 +109,23 @@ class odometer {
     }
 }
 
+class odometer_counter {
+    constructor(x,y,title,rate,size=1) {
+        this.x = x;            // X Location
+        this.y = y;            // Y Location
+        this.rate = rate;      // Rate (Relates to the value)
+        this.size = size*175;  // Size of Odometer
+        this.title = title;    // Name of Odometer
+    }
+    draw(value) {
+        console.log(value);
+    }
+}
+
 let speed = new odometer(75,75,'Speed','mph',50,0,0.75);
 let voltage = new odometer(75*3,75,'Voltage','V',53,43,0.75,0);
 let current = new odometer(75*5,75,'Current','amps',150,0,0.75,6);
+let miles = new odometer_counter(75*7,75,'Miles','mi',0.75);
 
 let Motor_Temp = new odometer(75,75*3,'Motor Temp',"°F",150,32,0.75,4);
 let Battery_Temp_1 = new odometer(75*3,75*3,'Temp 1',"°F",120,32,0.75,4);
@@ -139,6 +151,7 @@ function draw() {
     speed.draw(30);
     voltage.draw(48);
     current.draw(48);
+    miles.draw(48.6548);
 
     Motor_Temp.draw(63);
     Battery_Temp_1.draw(45);
