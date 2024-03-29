@@ -22,7 +22,7 @@ class odometer {
         this.min = min;        // Minimum Value
         this.max = max;        // Maximum Value
         this.red = red;        // Number of Red Numbers (From Right)
-        this.size = size*175;  // Size of Odometer
+        this.size = size*200;  // Size of Odometer
         this.title = title;    // Name of Odometer
     }
     draw(value) {
@@ -39,8 +39,6 @@ class odometer {
 
         fill('#17202A');         //  TODO THIS PART::  -QUARTER_PI - (HALF_PI - HALF_PI * this.value/100)
         arc(this.x, this.y, this.size, this.size, PI-QUARTER_PI, PI-QUARTER_PI + (((270/(this.max-this.min))*(this.value-this.min))*PI/180));
-        
-        textAlign(CENTER);
         
         fill('#5D6D7E'); 
         circle(this.x, this.y, this.size*0.9)
@@ -110,26 +108,87 @@ class odometer {
 }
 
 class odometer_counter {
-    constructor(x,y,title,rate,size=1) {
+    constructor(x,y,title,size=1) {
         this.x = x;            // X Location
-        this.y = y;            // Y Location
-        this.rate = rate;      // Rate (Relates to the value)
-        this.size = size*175;  // Size of Odometer
+        this.y = y;            // Rate (Relates to the value)
+        this.size = size*200;  // Size of Odometer
         this.title = title;    // Name of Odometer
     }
-    draw(value) {
-        console.log(value);
+    draw(value) { // ###.####
+        value = round(value, 3);
+
+        fill("white");
+        rect(
+            this.x-this.size,
+            this.y-(this.size/2.8),
+            this.size*2,
+            this.size*0.125
+        );
+        
+        
+        fill("#5D6D7E");
+        rect(
+            this.x-this.size,
+            this.y-(this.size/2)+(this.size/4),
+            (this.size*2),
+            (this.size/2)
+        );
+        fill("#D6DBDF");
+        for (let i = 0; i < 6; i++) {
+            rect(
+                this.x-this.size+i*3*(this.size*2)/19+(i+1)*(this.size*2)/(19*7),
+                this.y-(this.size/2)+(this.size*2)/(19*7)+(this.size/4),
+                3*(this.size*2)/19,
+                (this.size/2)-2*(this.size*2)/(19*7)
+            );
+        }
+        fill("#17202A");
+        
+        textSize((this.size/2)-(this.size/100))
+
+        let numbers = []
+        let numberStr = value.toString().replace('.', '');
+        for (let i = 0; i < numberStr.length; i++) {
+            numbers.push(parseInt(numberStr[i], 10));
+        }
+        if(numbers.length == 5 && value >9){
+            numbers.unshift(0);
+        }else if(numbers.length == 4)
+        for (let i = 0; i < 6; i++) {
+            text(
+                numbers[i],
+                this.x-5*(this.size*2)/12+i*(this.size*2)/6,
+                this.y+(this.size/30)
+            );
+        };
+        
+        text(
+            ".",
+            this.x,
+            this.y+(this.size/30)
+        );
+
+        textSize(this.size*0.125);
+
+        text(
+            this.title,
+            this.x,
+            this.y-(this.size/3.4)
+        );
+        
+        
     }
 }
 
-let speed = new odometer(75,75,'Speed','mph',50,0,0.75);
-let voltage = new odometer(75*3,75,'Voltage','V',53,43,0.75,0);
-let current = new odometer(75*5,75,'Current','amps',150,0,0.75,6);
-let miles = new odometer_counter(75*7,75,'Miles','mi',0.75);
+let speed = new odometer(75,100,'Speed','mph',50,0,0.7);
+let voltage = new odometer(75*3,100,'Voltage','V',53,43,0.7,0);
+let current = new odometer(75*5,100,'Current','amps',150,-20,0.7,6);
+let miles = new odometer_counter(75*8,50,'Miles',0.7);
+let ampHrs = new odometer_counter(75*8,140,'Amp Hours',0.7);
 
-let Motor_Temp = new odometer(75,75*3,'Motor Temp',"°F",150,32,0.75,4);
-let Battery_Temp_1 = new odometer(75*3,75*3,'Temp 1',"°F",120,32,0.75,4);
-let Battery_Temp_2 = new odometer(75*5,75*3,'Temp 2',"°F",120,32,0.75,4);
+let Motor_Temp = new odometer(100,100*3,'Motor Temp',"°F",150,32,0.7,4);
+let Battery_Temp_1 = new odometer(100*3,100*3,'Temp 1',"°F",120,32,0.7,4);
+let Battery_Temp_2 = new odometer(100*5,100*3,'Temp 2',"°F",120,32,0.7,4);
 
 function setup() {
     realWindowsWidth = windowWidth - 184
@@ -137,7 +196,7 @@ function setup() {
     var canvas = createCanvas(windowWidth-184, windowHeight-104);
     canvas.parent('p5Canvas');
 
-
+    textAlign(CENTER,CENTER);
     frameRate(20);
 }
 function windowResized() {
@@ -148,13 +207,17 @@ function windowResized() {
 
 
 function draw() {
-    speed.draw(30);
+    
+    speed.draw(0);
     voltage.draw(48);
-    current.draw(48);
-    miles.draw(48.6548);
+    current.draw(0);
+    miles.draw(0);
+    ampHrs.draw(48.6548);
 
     Motor_Temp.draw(63);
     Battery_Temp_1.draw(45);
     Battery_Temp_2.draw(44);
+
+    // circle(200,500,20)
 }
 
