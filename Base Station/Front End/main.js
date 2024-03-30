@@ -1,5 +1,8 @@
-let items = []
-let Allitems = ['ca_AmpHrs', 'ca_Voltage', 'ca_Current', 'ca_Speed', 'ca_Miles', 'motor_temp', 'Battery_1', 'Battery_2', 'IMU_Accel_x', 'IMU_Accel_y', 'IMU_Accel_z', 'IMU_Gyro_x', 'IMU_Gyro_y', 'IMU_Gyro_z', 'Brake_Pedal', 'throttle', 'counter', 'time']
+let items = [];
+let Allitems = ['ca_AmpHrs', 'ca_Voltage', 'ca_Current', 'ca_Speed', 'ca_Miles', 'motor_temp', 'Battery_1', 'Battery_2', 'IMU_Accel_x', 'IMU_Accel_y', 'IMU_Accel_z', 'IMU_Gyro_x', 'IMU_Gyro_y', 'IMU_Gyro_z', 'Brake_Pedal', 'throttle', 'counter', 'time'];
+var hidden = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
+var objects = [];
+
 function updateContent() {
     // Get the selected value from the dropdown
     var school = document.getElementById("schoolSelection").value;
@@ -135,6 +138,10 @@ class odometer {
             text(round((i*(this.max-this.min)/10)+this.min), this.x+this.size*(x_table[i]), this.y+this.size*(y_table[i]));
         }
     }
+    hide(){
+        fill('white'); 
+        circle(this.x, this.y, this.size);
+    }
 }
 
 class odometer_counter {
@@ -256,6 +263,15 @@ class odometer_counter {
             this.y-(this.size/3.4)
         );
     }
+    hide(){
+        fill("white");
+        rect(
+            this.x-this.size,
+            this.y-(this.size/2.8),
+            this.size*2,
+            this.size*0.61
+        );
+    }
 }
 
 class graph {
@@ -268,11 +284,11 @@ class graph {
 }
 
 
-let speed = new odometer(75,100,'Speed','mph',50,0,0.7);
-let voltage = new odometer(75*3,100,'Voltage','V',53,43,0.7,0);
-let current = new odometer(75*5,100,'Current','amps',150,-20,0.7,6);
-let miles = new odometer_counter(75*8,50,'Miles',0.7);
-let ampHrs = new odometer_counter(75*8,140,'Amp Hours',0.7);
+objects[0] = new odometer_counter(75*8,140,'Amp Hours',0.7);
+objects[1]= new odometer(75*3,100,'Voltage','V',53,43,0.7,0);
+objects[2] = new odometer(75*5,100,'Current','amps',150,-20,0.7,6);
+objects[3] = new odometer(75,100,'Speed','mph',50,0,0.7);
+objects[4] = new odometer_counter(75*8,50,'Miles',0.7);
 
 let Motor_Temp = new odometer(75*2.75,300+150/2,'Motor Temp',"°F",150,32,0.7,4);
 let Battery_Temp_1 = new odometer(75,300,'Temp 1',"°F",120,32,0.7,4);
@@ -287,11 +303,9 @@ function setup() {
     textAlign(CENTER,CENTER);
     frameRate(20);
 
-    speed.setup();
-    voltage.setup();
-    current.setup();
-    miles.setup();
-    ampHrs.setup();
+    for (let i = 0; i < 5; i++) {
+        objects[i].setup();
+    }
 
     Motor_Temp.setup();
     Battery_Temp_1.setup();
@@ -306,59 +320,167 @@ function windowResized() {
 }
 
 function draw() {
-    if(items.includes('ca_AmpHrs')){
-        
+
+
+
+    for (let i = 0; i < 18; i++) {
+        // if(items.includes(Allitems[0])){
+        //     ampHrs.setup();
+        // }else{
+        //     if(!hidden[0]){
+        //         ampHrs.hide();
+        //         hidden[0] = true;
+        //     }
+        // }
     }
-    if(items.includes('ca_Voltage')){
-        
-    }
-    if(items.includes('ca_Current')){
-        
-    }
-    if(items.includes('ca_Speed')){
-        
-    }
-    if(items.includes('ca_Miles')){
-        
-    }
-    if(items.includes('motor_temp')){
-        
-    }
-    if(items.includes('Battery_1')){
-        
-    }
-    if(items.includes('Battery_2')){
-        
-    }
-    if(items.includes('IMU_Accel_x')){
-        
-    }
-    if(items.includes('IMU_Accel_y')){
-        
-    }
-    if(items.includes('IMU_Accel_z')){
-        
-    }
-    if(items.includes('IMU_Gyro_x')){
-        
-    }
-    if(items.includes('IMU_Gyro_y')){
-        
-    }
-    if(items.includes('IMU_Gyro_z')){
-        
-    }
-    if(items.includes('Brake_Pedal')){
-        
-    }
-    if(items.includes('throttle')){
-        
-    }
-    if(items.includes('counter')){
-        
-    }
-    if(items.includes('time')){
-        
-    }
+
+
+
+
+    
+    // if(items.includes('ca_AmpHrs')){
+    //     ampHrs.setup();
+    // }else{
+    //     if(!hidden[0]){
+    //         ampHrs.hide();
+    //         hidden[0] = true;
+    //     }
+    // }
+    // if(items.includes('ca_Voltage')){
+    //     ampHrs.setup();
+    // }else{
+    //     if(!hidden[0]){
+    //         ampHrs.hide();
+    //         hidden[0] = true;
+    //     }
+    // }
+    // if(items.includes('ca_Current')){
+    //     ampHrs.setup();
+    // }else{
+    //     if(!hidden[0]){
+    //         ampHrs.hide();
+    //         hidden[0] = true;
+    //     }
+    // }
+    // if(items.includes('ca_Speed')){
+    //     ampHrs.setup();
+    // }else{
+    //     if(!hidden[0]){
+    //         ampHrs.hide();
+    //         hidden[0] = true;
+    //     }
+    // }
+    // if(items.includes('ca_Miles')){
+    //     ampHrs.setup();
+    // }else{
+    //     if(!hidden[0]){
+    //         ampHrs.hide();
+    //         hidden[0] = true;
+    //     }
+    // }
+    // if(items.includes('motor_temp')){
+    //     ampHrs.setup();
+    // }else{
+    //     if(!hidden[0]){
+    //         ampHrs.hide();
+    //         hidden[0] = true;
+    //     }
+    // }
+    // if(items.includes('Battery_1')){
+    //     ampHrs.setup();
+    // }else{
+    //     if(!hidden[0]){
+    //         ampHrs.hide();
+    //         hidden[0] = true;
+    //     }
+    // }
+    // if(items.includes('Battery_2')){
+    //     ampHrs.setup();
+    // }else{
+    //     if(!hidden[0]){
+    //         ampHrs.hide();
+    //         hidden[0] = true;
+    //     }
+    // }
+    // if(items.includes('IMU_Accel_x')){
+    //     ampHrs.setup();
+    // }else{
+    //     if(!hidden[0]){
+    //         ampHrs.hide();
+    //         hidden[0] = true;
+    //     }
+    // }
+    // if(items.includes('IMU_Accel_y')){
+    //     ampHrs.setup();
+    // }else{
+    //     if(!hidden[0]){
+    //         ampHrs.hide();
+    //         hidden[0] = true;
+    //     }
+    // }
+    // if(items.includes('IMU_Accel_z')){
+    //     ampHrs.setup();
+    // }else{
+    //     if(!hidden[0]){
+    //         ampHrs.hide();
+    //         hidden[0] = true;
+    //     }
+    // }
+    // if(items.includes('IMU_Gyro_x')){
+    //     ampHrs.setup();
+    // }else{
+    //     if(!hidden[0]){
+    //         ampHrs.hide();
+    //         hidden[0] = true;
+    //     }
+    // }
+    // if(items.includes('IMU_Gyro_y')){
+    //     ampHrs.setup();
+    // }else{
+    //     if(!hidden[0]){
+    //         ampHrs.hide();
+    //         hidden[0] = true;
+    //     }
+    // }
+    // if(items.includes('IMU_Gyro_z')){
+    //     ampHrs.setup();
+    // }else{
+    //     if(!hidden[0]){
+    //         ampHrs.hide();
+    //         hidden[0] = true;
+    //     }
+    // }
+    // if(items.includes('Brake_Pedal')){
+    //     ampHrs.setup();
+    // }else{
+    //     if(!hidden[0]){
+    //         ampHrs.hide();
+    //         hidden[0] = true;
+    //     }
+    // }
+    // if(items.includes('throttle')){
+    //     ampHrs.setup();
+    // }else{
+    //     if(!hidden[0]){
+    //         ampHrs.hide();
+    //         hidden[0] = true;
+    //     }
+    // }
+    // if(items.includes('counter')){
+    //     ampHrs.setup();
+    // }else{
+    //     if(!hidden[0]){
+    //         ampHrs.hide();
+    //         hidden[0] = true;
+    //     }
+    // }
+    // if(items.includes('time')){
+    //     ampHrs.setup();
+    // }else{
+    //     if(!hidden[0]){
+    //         ampHrs.hide();
+    //         hidden[0] = true;
+    //     }
+    // }
 }
 
