@@ -274,9 +274,9 @@ let current = new odometer(75*5,100,'Current','amps',150,-20,0.7,6);
 let miles = new odometer_counter(75*8,50,'Miles',0.7);
 let ampHrs = new odometer_counter(75*8,140,'Amp Hours',0.7);
 
-let Motor_Temp = new odometer(100,100*3,'Motor Temp',"°F",150,32,0.7,4);
-let Battery_Temp_1 = new odometer(100*3,100*3,'Temp 1',"°F",120,32,0.7,4);
-let Battery_Temp_2 = new odometer(100*5,100*3,'Temp 2',"°F",120,32,0.7,4);
+let Motor_Temp = new odometer(75*2.75,300+150/2,'Motor Temp',"°F",150,32,0.7,4);
+let Battery_Temp_1 = new odometer(75,300,'Temp 1',"°F",120,32,0.7,4);
+let Battery_Temp_2 = new odometer(75,450,'Temp 2',"°F",120,32,0.7,4);
 
 function setup() {
     realWindowsWidth = windowWidth - 184;
@@ -292,6 +292,11 @@ function setup() {
     current.setup();
     miles.setup();
     ampHrs.setup();
+
+    Motor_Temp.setup();
+    Battery_Temp_1.setup();
+    Battery_Temp_2.setup();
+
 }
 
 function windowResized() {
@@ -301,20 +306,59 @@ function windowResized() {
 }
 
 function draw() {
-    
-        // Cycle Analyst
-    // speed.draw(0);
-    // voltage.draw(48);
-    // current.draw(0);
-    // miles.draw(400);
-    // ampHrs.draw(48.6548);
-
-    Motor_Temp.draw(63);
-    Battery_Temp_1.draw(45);
-    Battery_Temp_2.draw(44);
-
-    // circle(200,500,20)
-
-    // selection();
+    if(items.includes('ca_AmpHrs')){
+        
+    }
+    if(items.includes('ca_Voltage')){
+        
+    }
+    if(items.includes('ca_Current')){
+        
+    }
+    if(items.includes('ca_Speed')){
+        
+    }
+    if(items.includes('ca_Miles')){
+        
+    }
+    if(items.includes('motor_temp')){
+        
+    }
+    if(items.includes('Battery_1')){
+        
+    }
+    if(items.includes('Battery_2')){
+        
+    }
+    if(items.includes('IMU_Accel_x')){
+        
+    }
+    if(items.includes('IMU_Accel_y')){
+        
+    }
+    if(items.includes('IMU_Accel_z')){
+        
+    }
+    if(items.includes('IMU_Gyro_x')){
+        
+    }
+    if(items.includes('IMU_Gyro_y')){
+        
+    }
+    if(items.includes('IMU_Gyro_z')){
+        
+    }
+    if(items.includes('Brake_Pedal')){
+        
+    }
+    if(items.includes('throttle')){
+        
+    }
+    if(items.includes('counter')){
+        
+    }
+    if(items.includes('time')){
+        
+    }
 }
 
