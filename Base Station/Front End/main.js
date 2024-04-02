@@ -26,12 +26,12 @@ objects[5] = new odometer(75*2.75,300+150/2,'Motor Temp',"°F",150,32,0.7,4);
 objects[6] = new odometer(75,300,'Temp 1',"°F",120,32,0.7,4);
 objects[7] = new odometer(75,450,'Temp 2',"°F",120,32,0.7,4);
 
-objects[8] = new graph(600,200,'Acl. X',1);
-objects[9] = new graph(825,200,'Acl. Y',1);
-objects[10] = new graph(1050,200,'Acl. Z',1);
-objects[11] = new graph(600,375,'Gry. X',1);
-objects[12] = new graph(825,375,'Gry. Y',1);
-objects[13] = new graph(1050,375,'Gry. Z',1);
+objects[8] = new graph(400,200,'Acceleration. X',0.9,"Counter","m per s^2");
+objects[9] = new graph(589,200,'Acceleration. Y',0.9,"Counter","m per s^2");
+objects[10] = new graph(778,200,'Acceleration. Z',0.9,"Counter","m per s^2");
+objects[11] = new graph(400,344,'Gyroscopic. X',0.9,"Counter","Value?");
+objects[12] = new graph(589,344,'Gyroscopic. Y',0.9,"Counter","Value?");
+objects[13] = new graph(778,344,'Gyroscopic. Z',0.9,"Counter","Value?");
 
 function setup() {
     realWindowsWidth = windowWidth - 184;
@@ -68,8 +68,6 @@ function draw() {
                 objects[i].setup();
             }
             //Update the object if it is live HERE
-
-            // objects[8].draw([1,2,3,4,5,6,7,8,9,10],[5,9,3,7,15,8,1,82,0,20]);
 
 
         }else{
