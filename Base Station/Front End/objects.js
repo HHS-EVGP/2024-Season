@@ -375,3 +375,39 @@ class graph {
         rect(this.x-this.size/2,this.y,this.size,this.size*3/4)
     }
 }
+
+class throttle {
+    constructor(x,y,title,rate) {
+        this.x = x;            // X Location
+        this.y = y;            // Y Location
+        this.title = title;    // Name
+        this.rate = rate;      // Rate (Relates to the value)
+    }
+    setup(){
+
+    }
+    draw(value){
+
+    }
+    hide(){
+        
+    }
+}
+
+class blank {
+    constructor(x,y,title,rate) {
+        this.x = x;            // X Location
+        this.y = y;            // Y Location
+        this.title = title;    // Name
+        this.rate = rate;      // Rate (Relates to the value)
+    }
+    setup(){
+
+    }
+    draw(value){
+
+    }
+    hide(){
+        
+    }
+}

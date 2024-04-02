@@ -10,14 +10,10 @@ function updateContent() {
     if(document.getElementById("itemSelection").value == "All"){
         items = Allitems;
     }
-    // console.log('Selected school:', school);
-    // console.log('Selected things:', items);
 } 
 updateContent();
 
-var realWindowsWidth, realWindowsHeight
-
-
+var realWindowsWidth, realWindowsHeight;
 
 
 objects[0] = new odometer_counter(75*8,140,'Amp Hours',0.7);
@@ -53,8 +49,8 @@ function setup() {
 }
 
 function windowResized() {  
-    realWindowsWidth = windowWidth - 184
-    realWindowsHeight = windowHeight - 104
+    realWindowsWidth = windowWidth - 184;
+    realWindowsHeight = windowHeight - 104;
     resizeCanvas(windowWidth-184, windowHeight-104);
 
     for (let i = 0; i < 14; i++) {
@@ -73,7 +69,7 @@ function draw() {
             }
             //Update the object if it is live HERE
 
-            objects[8].draw([1,2,3,4,5,6,7,8,9,10],[5,9,3,7,15,8,1,82,0,20])
+            // objects[8].draw([1,2,3,4,5,6,7,8,9,10],[5,9,3,7,15,8,1,82,0,20]);
 
 
         }else{
