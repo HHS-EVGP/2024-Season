@@ -50,7 +50,7 @@ function setup() {
     textAlign(CENTER,CENTER);
     frameRate(20);
 
-    console.log(objects.length);
+    // console.log(objects.length);
 
     for (let i = 0; i < objects.length; i++) {
         objects[i].setup();
@@ -80,6 +80,7 @@ function draw() {
             }
             //Update the object if it is live HERE
 
+            // objects[15].draw(0);
 
         }else{
             if(!hidden[i]){
