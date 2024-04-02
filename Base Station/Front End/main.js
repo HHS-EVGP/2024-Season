@@ -33,6 +33,14 @@ objects[11] = new graph(400,344,'Gyroscopic. X',0.9,"Counter","Value?");
 objects[12] = new graph(589,344,'Gyroscopic. Y',0.9,"Counter","Value?");
 objects[13] = new graph(778,344,'Gyroscopic. Z',0.9,"Counter","Value?");
 
+objects[14] = new blank(0,0,'Brake Pedal',1);
+
+objects[15] = new throttle(200,600,'Throttle',1);
+
+objects[16] = new blank(0,0,'Counter',1);
+objects[17] = new blank(0,0,'Time',1);
+
+
 function setup() {
     realWindowsWidth = windowWidth - 184;
     realWindowsHeight = windowHeight - 104;
@@ -42,7 +50,9 @@ function setup() {
     textAlign(CENTER,CENTER);
     frameRate(20);
 
-    for (let i = 0; i < 14; i++) {
+    console.log(objects.length);
+
+    for (let i = 0; i < objects.length; i++) {
         objects[i].setup();
     }
 
@@ -53,13 +63,14 @@ function windowResized() {
     realWindowsHeight = windowHeight - 104;
     resizeCanvas(windowWidth-184, windowHeight-104);
 
-    for (let i = 0; i < 14; i++) {
+    for (let i = 0; i < objects.length; i++) {
         objects[i].setup();
+        
     }
 }
 
 function draw() {
-    for (let i = 0; i < 14; i++) {
+    for (let i = 0; i < objects.length; i++) {
         // console.log(i, items.includes(Allitems[i]),hidden[i]);
 
         if(items.includes(Allitems[i])){

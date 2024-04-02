@@ -377,14 +377,16 @@ class graph {
 }
 
 class throttle {
-    constructor(x,y,title,rate) {
+    constructor(x,y,title,size) {
         this.x = x;            // X Location
         this.y = y;            // Y Location
+        this.size = size;      // Size
         this.title = title;    // Name
-        this.rate = rate;      // Rate (Relates to the value)
     }
     setup(){
-
+        strokeWeight(1);
+        fill("black")
+        line(this.x,this.y,this.x+10,this.y+20);
     }
     draw(value){
 
