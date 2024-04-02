@@ -1,4 +1,9 @@
 class odometer {
+    /*
+    Odometer code comes from:
+    That Guy | 2019
+    https://www.youtube.com/watch?v=JNqlavrjvDg
+    */
     constructor(x,y,title,rate,max=100,min=0,size=1,red=3) {
         this.x = x;            // X Location
         this.y = y;            // Y Location
@@ -316,7 +321,7 @@ class graph {
         );
     }
     draw(x_values,y_values){
-        setup();
+        this.setup();
 
         let leng = x_values.length;
         let y_min = min(y_values);
@@ -380,19 +385,65 @@ class throttle {
     constructor(x,y,title,size) {
         this.x = x;            // X Location
         this.y = y;            // Y Location
-        this.size = size;      // Size
+        this.size = size*200;      // Size
         this.title = title;    // Name
     }
     setup(){
+        /* 
+        Gradient Code comes from: 
+        Jeff Thompson | 2021 | jeffreythompson.org
+        https://editor.p5js.org/jeffThompson/sketches/ta7msUszJ
+        */
+        let gradient = drawingContext.createLinearGradient(this.x,this.y, this.x+this.size,this.y);
+        gradient.addColorStop(0, 'green');
+        gradient.addColorStop(0.35, 'green');
+        gradient.addColorStop(0.55, 'yellow');
+        gradient.addColorStop(0.75, 'orange');
+        gradient.addColorStop(1, 'red');
+        drawingContext.fillStyle = gradient;
+        strokeWeight(0);
+        triangle(
+            this.x,this.y,
+            this.x+this.size,this.y,
+            this.x+this.size,this.y-this.size*(3/8)
+        );
         strokeWeight(1);
-        fill("black")
-        line(this.x,this.y,this.x+10,this.y+20);
+        line(this.x,this.y,this.x+this.size,this.y);
+        line(this.x,this.y,this.x+this.size,this.y-this.size*(3/8));
+        line(this.x+this.size,this.y-this.size*(3/8),this.x+this.size,this.y);
+
+        drawingContext.fillStyle = "white";
     }
     draw(value){
+        this.setup();
 
+        fill("white");
+        stroke("white");
+        strokeWeight(1);
+
+        rect(
+            this.x+this.size*(value),
+            this.y-this.size*(3/8),
+            this.size*(1-value)+1,
+            this.size*(3/8)+1
+        );
+
+        stroke("black");
+        strokeWeight(1);
+        line(this.x,this.y,this.x+this.size,this.y);
+        line(this.x,this.y,this.x+this.size,this.y-this.size*(3/8));
+        line(this.x+this.size,this.y-this.size*(3/8),this.x+this.size,this.y);
     }
     hide(){
-        
+        fill("white");
+        stroke("white");
+        strokeWeight(1);
+        rect(
+            this.x,
+            this.y-this.size*(3/8),
+            this.size+1,
+            this.size*(3/8)+1
+        );
     }
 }
 
