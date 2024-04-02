@@ -288,49 +288,55 @@ class graph {
     }
     draw(x_values,y_values){
         setup();
-        /* 
-        From:
-        this.x-this.size/2+(1/8)*this.size
 
-        To:
-        this.x+this.size/2-(6*this.size/200)
-
-        */
-
-        
-        /* 
-        From:
-        this.y+(18*this.size/200)
-
-        To:
-        this.y+this.size*(3/4)*(7/8)-(6*this.size/200)
-
-        */
-        let x_leng = x_values.length;
+        let leng = x_values.length;
         let y_min = min(y_values);
         let y_max = max(y_values);
 
         console.log(y_min)
 
-        for (let i = 0; i < x_leng; i++) {
-            let x_point = (this.x-this.size/2+(1/8)*this.size) + (((i+0.5)/x_leng)*((this.x+this.size/2-(6*this.size/200))-(this.x-this.size/2+(1/8)*this.size)));
+        for (let i = 0; i < leng; i++) {
+            let x_point = (this.x-this.size/2+(1/8)*this.size) + (((i+0.5)/leng)*((this.x+this.size/2-(6*this.size/200))-(this.x-this.size/2+(1/8)*this.size)) + (2.5/64*this.size));
+            let x_point3 = (this.x-this.size/2+(1/8)*this.size) + ((((i+1)+0.5)/leng)*((this.x+this.size/2-(6*this.size/200))-(this.x-this.size/2+(1/8)*this.size)) + (2.5/64*this.size));
             let y_point = (this.y+(18*this.size/200)) + (i/10*((this.y+this.size*(3/4)*(7/8)-(6*this.size/200))-(this.y+(18*this.size/200))));
+            let y_point2 = map(
+                y_values[i],
+                y_min,
+                y_max,
+                (this.y+(18*this.size/200)) + ((leng-1)/10*((this.y+this.size*(3/4)*(7/8)-(6*this.size/200))-(this.y+(18*this.size/200)))),
+                (this.y+(18*this.size/200)) + (0/10*((this.y+this.size*(3/4)*(7/8)-(6*this.size/200))-(this.y+(18*this.size/200))))
+                );
+            let y_point3 = map(
+                y_values[i+1],
+                y_min,
+                y_max,
+                (this.y+(18*this.size/200)) + ((leng-1)/10*((this.y+this.size*(3/4)*(7/8)-(6*this.size/200))-(this.y+(18*this.size/200)))),
+                (this.y+(18*this.size/200)) + (0/10*((this.y+this.size*(3/4)*(7/8)-(6*this.size/200))-(this.y+(18*this.size/200))))
+                );
             //X
             text(
                 x_values[i],
                 x_point,
                 this.y+this.size*(3/4)*(7/8)+(6*this.size/200)
             );
-            //Y  WORKING HERE
+            textAlign(RIGHT, CENTER);
             text(
-                y_min+(y_max-y_min)*(10-(i+1))/11,
-                this.x-this.size/2+(1/8)*this.size-(6*this.size/200),
+                round(y_min+(y_max-y_min)*(map(i,0,(leng-1),1,0)),1),
+                this.x-this.size/2+(11/64)*this.size - (1*this.size/200),
                 y_point
             );
-            strokeWeight(10);
+            textAlign(CENTER, CENTER);
+            strokeWeight(3);
             point(
                 x_point,
-                y_values[i]+500
+                y_point2
+            );
+            strokeWeight(1);
+            line(
+                x_point,
+                y_point2,
+                x_point3,
+                y_point3
             );
         }
     }
@@ -341,15 +347,15 @@ class graph {
         strokeWeight(1);
         fill("black");
         line(
-            this.x-this.size/2+(1/8)*this.size,
+            this.x-this.size/2+(11/64)*this.size,
             this.y+this.size*(3/4)*(7/8),
             this.x+this.size/2,
             this.y+this.size*(3/4)*(7/8)
         );
         line(
-            this.x-this.size/2+(1/8)*this.size,
+            this.x-this.size/2+(11/64)*this.size,
             this.y,
-            this.x-this.size/2+(1/8)*this.size,
+            this.x-this.size/2+(11/64)*this.size,
             this.y+this.size*(3/4)*(7/8)
         );
         
@@ -443,7 +449,7 @@ function draw() {
             }
             //Update the object if it is live HERE
 
-            objects[8].draw([1,2,3,4,5,6,7,8,9,10],[1,5,2,7,2,6,8,2,7,3])
+            objects[8].draw([1,2,3,4,5,6,7,8,9,10],[5,9,3,7,15,8,1,82,0,20])
 
 
         }else{
