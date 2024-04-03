@@ -1,3 +1,7 @@
 User:     "base"
 Password: "evgp"
 hostname: "base.local"
+
+
+Things to setup:
+- lighttpd
