@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO          # import RPi.GPIO module
 from sys import argv 
 import time
 
-wifi_status_led = None # SET THIS
+wifi_status_led = 25
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(wifi_status_led, GPIO.OUT)
