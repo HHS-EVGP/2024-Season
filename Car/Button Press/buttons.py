@@ -20,10 +20,10 @@ gpio.setmode(gpio.BCM)
 gpio.setup(button1_gpio_pin, gpio.IN)
 gpio.setup(button2_gpio_pin, gpio.IN)
 
-def start_code():
-    start_service("transmit.service")
+def start_code(channel):
+    start_service()
 
-def shutdown():
+def shutdown(channel):
     restart_now()
     
 gpio.add_event_detect(button1_gpio_pin, gpio.RISING, callback=start_code, bouncetime=300)
