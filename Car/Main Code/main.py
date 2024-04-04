@@ -18,7 +18,7 @@ print("I guess all of the packages loaded! (:")
 school_id = "hhs"
 
 #Setup Send LED
-sendLED = None # SET THIS
+sendLED = 24
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(sendLED, GPIO.OUT)
 GPIO.output(sendLED, 0)
