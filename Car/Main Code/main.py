@@ -73,9 +73,9 @@ def imuPull():
 
 def UART():
     # Send output as: "CA,amp_hours,voltage,current,speed,miles|"
-    data = cycleAnalyst.read(10)
-    print(bytes)
-    print(data)
+    # data = cycleAnalyst.read(10)
+    # print(bytes)
+    # print(data)
     return f"CA,None,None,None,None,None|"
 
 def analogPull():
