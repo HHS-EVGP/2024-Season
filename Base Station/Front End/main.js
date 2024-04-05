@@ -33,9 +33,9 @@ objects[11] = new graph(400,344,'Gyroscopic. X',0.9,"Counter","Value?");
 objects[12] = new graph(589,344,'Gyroscopic. Y',0.9,"Counter","Value?");
 objects[13] = new graph(778,344,'Gyroscopic. Z',0.9,"Counter","Value?");
 
-objects[14] = new blank(0,0,'Brake Pedal',1);
+objects[14] = new brake(775,180,'Brake Pedal',1);
 
-objects[15] = new throttle(200,600,'Throttle',1);
+objects[15] = new throttle(775,80,'Throttle',1);
 
 objects[16] = new blank(0,0,'Counter',1);
 objects[17] = new blank(0,0,'Time',1);
