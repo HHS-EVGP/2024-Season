@@ -37,8 +37,8 @@ objects[14] = new brake(775,180,'Brake Pedal',1);
 
 objects[15] = new throttle(775,80,'Throttle',1);
 
-objects[16] = new blank(0,0,'Counter',1);
-objects[17] = new blank(0,0,'Time',1);
+objects[16] = new plain_text(250,490,'Counter',1);
+objects[17] = new plain_text(600,490,'Time',1);
 
 
 function setup() {

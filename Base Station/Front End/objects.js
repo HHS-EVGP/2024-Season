@@ -139,6 +139,8 @@ class odometer_counter {
         this.title = title;    // Name of Odometer
     }
     setup(){
+        textAlign(CENTER,CENTER);
+
         var value = 0;
         fill("white");
         rect(
@@ -195,6 +197,8 @@ class odometer_counter {
         );
     }
     draw(value) {
+        textAlign(CENTER,CENTER);
+
         value = round(value, 3);
         fill("white");
         rect(
@@ -412,14 +416,13 @@ class throttle {
         line(this.x,this.y,this.x+this.size,this.y-this.size*(3/8));
         line(this.x+this.size,this.y-this.size*(3/8),this.x+this.size,this.y);
 
-        rotate(0.35877);
-
+        translate(this.x,this.y-this.size*(1/16));
+        rotate(-0.35877);
         textSize(this.size/10)
-
         fill("black");
-        text("Hello!",this.x,0);
-
-        rotate(0);
+        text(this.title,this.size/2,0);
+        rotate(0.35877);
+        translate(-this.x,-this.y+this.size*(1/16));
 
         drawingContext.fillStyle = "white";
     }
@@ -487,6 +490,14 @@ class brake {
         line(this.x,this.y,this.x+this.size,this.y-this.size*(3/8));
         line(this.x+this.size,this.y-this.size*(3/8),this.x+this.size,this.y);
 
+        translate(this.x,this.y-this.size*(1/16));
+        rotate(-0.35877);
+        textSize(this.size/10)
+        fill("black");
+        text(this.title,this.size/2,0);
+        rotate(0.35877);
+        translate(-this.x,-this.y+this.size*(1/16));
+
         drawingContext.fillStyle = "white";
     }
     draw(value){
@@ -522,12 +533,60 @@ class brake {
     }
 }
 
-class blank {
-    constructor(x,y,title,rate) {
+class plain_text {
+    constructor(x,y,title,size) {
         this.x = x;            // X Location
         this.y = y;            // Y Location
         this.title = title;    // Name
-        this.rate = rate;      // Rate (Relates to the value)
+        this.size = size;
+    }
+    setup(){
+        fill("lightgray");
+        strokeWeight(1);
+        rect(
+            this.x,this.y,
+            300*this.size,50*this.size
+        );
+        fill("black");
+        strokeWeight(1);
+        textSize(17*this.size);
+        textAlign(CENTER,TOP);
+
+        text(
+            this.title+":",
+            this.x+150*this.size,
+            this.y+2*this.size
+        );
+    }
+    draw(value){
+        this.setup();
+        textSize(19*this.size);
+        textAlign(CENTER,BOTTOM);
+        text(
+            value,
+            this.x+150*this.size,
+            this.y+45*this.size
+        );
+    }
+    hide(){
+        fill("white");
+        strokeWeight(2);
+        stroke("white");
+        rect(
+            this.x,this.y,
+            300*this.size,50*this.size
+        );
+        strokeWeight(1);
+        stroke("black");
+
+    }
+}
+
+class blank {
+    constructor(x,y,title) {
+        this.x = x;            // X Location
+        this.y = y;            // Y Location
+        this.title = title;    // Name
     }
     setup(){
 
