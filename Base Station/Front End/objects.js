@@ -4,7 +4,7 @@ class odometer {
     That Guy | 2019
     https://www.youtube.com/watch?v=JNqlavrjvDg
     */
-    constructor(x,y,title,rate,max=100,min=0,size=1,red=3) {
+    constructor(x,y,title,size=1,rate,max=100,min=0,red=3) {
         this.x = x;            // X Location
         this.y = y;            // Y Location
         this.rate = rate;      // Rate (Relates to the value)
