@@ -473,10 +473,10 @@ class brake {
         https://editor.p5js.org/jeffThompson/sketches/ta7msUszJ
         */
         let gradient = drawingContext.createLinearGradient(this.x,this.y, this.x+this.size,this.y);
-        gradient.addColorStop(0, 'green');
-        gradient.addColorStop(0.35, 'green');
-        gradient.addColorStop(0.55, 'yellow');
-        gradient.addColorStop(0.75, 'orange');
+        gradient.addColorStop(0, 'black');
+        gradient.addColorStop(0.25, 'black');
+        gradient.addColorStop(0.45, 'black');
+        gradient.addColorStop(0.75, 'red');
         gradient.addColorStop(1, 'red');
         drawingContext.fillStyle = gradient;
         strokeWeight(0);
