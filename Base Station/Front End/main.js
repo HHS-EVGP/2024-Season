@@ -10,9 +10,9 @@ function updateContent() {
     if(document.getElementById("itemSelection").value == "All"){
         items = Allitems;
     }
-} 
-updateContent();
+}
 
+updateContent();
 var realWindowsWidth, realWindowsHeight;
 
 objects[0]  = new odometer_counter(75*8,140,         'Amp Hours',       0.7);
@@ -39,10 +39,8 @@ function setup() {
     realWindowsHeight = windowHeight - 104;
     var canvas = createCanvas(windowWidth-184, windowHeight-104);
     canvas.parent('p5Canvas');
-
     textAlign(CENTER,CENTER);
     frameRate(20);
-
     for (let i = 0; i < objects.length; i++) {
         objects[i].setup();
     }
@@ -52,7 +50,6 @@ function windowResized() {
     realWindowsWidth = windowWidth - 184;
     realWindowsHeight = windowHeight - 104;
     resizeCanvas(windowWidth-184, windowHeight-104);
-
     for (let i = 0; i < objects.length; i++) {
         objects[i].setup();
     }
