@@ -10,6 +10,8 @@ This is the [Custom PCB](https://easyeda.com/editor#project_id=99b9e3133bff47dbb
 
 This is the [BOM](https://docs.google.com/spreadsheets/d/1r4ZYMB1CGVrokjruQE8f5Ll6aA9RmMalyvEBq1IVlM4/edit#gid=1060802711 "BOM")
 
+This is the [RasPi Clean Image](https://drive.google.com/file/d/1dLaY05kyVhCw5t2BLcr5kzJpe_fP41Z4/view?usp=sharing "RasPi Clean Image")
+
 
 
 What wer are collecting:
