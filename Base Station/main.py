@@ -22,9 +22,9 @@ rfm9x.tx_power = 23
 index = 1
 conter = 0
 
-while os.path.exists(f"/home/pit/{index}.data.csv"):
-    index += 1
-new_file_name = f"/home/pit/{index}.data.csv"
+# while os.path.exists(f"/home/data/front_end/{index}.data.csv"):
+#     index += 1
+new_file_name = f"/home/data/front_end/2.data.csv"
 
 fieldnames = [
     'school_id','time','counter',
@@ -68,6 +68,7 @@ def printError(erorr):
     print("_"*20)
     
 while True:
+    time.sleep(0.15)
     with open(new_file_name, 'a', newline='') as csv_file: 
         
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
@@ -85,15 +86,17 @@ while True:
             print('- Waiting for PKT -')
             writer.writerow({'time':datetime.now(),'counter':conter})
         else:
-            
+            print(packet)
             try:
                 current_packet = str(packet, "utf-8")
-                print(current_packet)
+                # print(current_packet)
+
+                pass
 
                 try:
                     all_data = current_packet.split('|')
                     
-                    school_ID, IN_throttle, IN_brake, IN_tempatureData, IN_imu, IN_cycle_analyst= map(str, all_data)
+                    school_ID, IN_throttle, IN_brake, IN_tempatureData, IN_imu, IN_cycle_analyst, IN_extra_NULL = map(str, all_data)
                     
                     print(school_ID)
                     
