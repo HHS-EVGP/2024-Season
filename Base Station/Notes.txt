@@ -1,6 +1,6 @@
-User:     "base"
+User:     "data"
 Password: "evgp"
-hostname: "base.local"
+hostname: "electric.local"
 
 
 Things to setup:
